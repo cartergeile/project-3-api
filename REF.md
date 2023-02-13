@@ -15,7 +15,7 @@ authentication and common middlewares.
 1. Replace all instances of `'express-auth-template'` with your app name.
 1. Install dependencies with `npm install`.
 1. Ensure that you have `nodemon` installed by running `npm install -g nodemon`.
-2. Once everything is working, make an initial commit.
+1. Once everything is working, make an initial commit.
 
 ## Structure
 
