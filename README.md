@@ -8,11 +8,74 @@ This API will allow the users of our react front-end application to CRUD boats a
 
 This application uses token authentication instead of sessions. 
 
-## Resources
+## Models/Schemas
+```
+Boat: {
+    name: {
+        type: String,
+        required: true
+    },
+    location: {
+        type: String,
+        required: true
+    },
+    type: {
+        type: ,
+        required: true
+    },
+    image: {
+        type: String
+    },
+    reservations: [reservationSchema],
+    owner: {
+        type: monggose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
+}
+
+user: {
+    {
+		email: {
+			type: String,
+			required: true,
+			unique: true,
+		},
+		hashedPassword: {
+			type: String,
+			required: true,
+		},
+		token: String,
+	},
+	{
+		timestamps: true,
+		toObject: {
+			transform: (_doc, user) => {
+				delete user.hashedPassword
+				return user
+			},
+		},
+	}
+}
+
+Reservation: {
+    rate: {
+        type: Number
+    },
+    date: {
+        type: Date
+    },
+    duration: {
+        type: Number
+    },
+    weather: {
+        type: String
+    }
+}
+```
+
+## Routes
 
 ### Boats
-
-##### Routes Table
 
 | Verb   | URI Pattern   | Controller#Action |
 |--------|---------------|-------------------|
@@ -24,8 +87,6 @@ This application uses token authentication instead of sessions.
 
 ### Users
 
-#### Routes Table
-
 | Verb   | URI Pattern            | Controller#Action |
 |--------|------------------------|-------------------|
 | POST   | `/sign-up`             | `users#signup`    |
@@ -34,8 +95,6 @@ This application uses token authentication instead of sessions.
 | DELETE | `/sign-out/`           | `users#signout`   |
 
 ### Reservations
-
-##### Routes Table
 
 | Verb   | URI Pattern                             | Controller#Action       |
 |--------|-----------------------------------------|-------------------------|
