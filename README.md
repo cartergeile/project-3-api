@@ -6,32 +6,62 @@ test change
 
 ## Overview 
 
-This API will allow the users of our react front-end application to CRUD boats and their reviews. 
+This API will allow the users of our react front-end application to CRUD boats and their boats. 
 
 This application uses token authentication instead of sessions. 
 
 ## Models/Schemas
 ```
+Trip: {
+    location: {
+        type: String,
+        enum: ['Mediterranean', 'Caribbean', 'Indian Ocean', 'Antarctica', 'Far East', 'Mississippi River' ],
+        required: true
+    },
+    startDate: {
+        type: Date,
+        required: true
+    },
+    endDate: {
+        type: Date,
+        required: true
+    },
+    boats: [boatSchema],
+    owner: {
+        type: monggose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
+}
+
 Boat: {
     name: {
         type: String,
         required: true
     },
-    location: {
+    captain: {
         type: String,
         required: true
     },
-    type: {
-        type: ,
+    passengerCapacity: {
+        type: Number,
+        required: true
+    },
+    length: {
+        type: Number,
+        required: true
+    },
+    petsAllowed: {
+        type: Boolean,
+        required: true
+    },
+    city: {
+        type: String,
         required: true
     },
     image: {
-        type: String
+        type: String,
+        required: true
     },
-    weather: {
-        type: enum
-    },
-    reviews: [reviewSchema],
     owner: {
         type: monggose.Schema.Types.ObjectId,
         ref: 'User'
@@ -61,31 +91,27 @@ user: {
 		},
 	}
 }
-
-Review: {
-   note: {
-        type: String,
-        required: true
-    },
-    author: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    } 
-}
 ```
 
 ## Routes
 
-### Boats
+### Trips
 
 | Verb   | URI Pattern   | Controller#Action |
 |--------|---------------|-------------------|
-| GET    | `/boats`      | `boats#index`     |
-| GET    | `/boats/:id`  | `boats#show`      |
-| POST   | `/boats`      | `boats#create`    |
-| PATCH  | `/boats/:id`  | `boats#update`    |
-| DELETE | `/boats/:id`  | `boats#delete`    |
+| GET    | `/trips`      | `trips#index`     |
+| GET    | `/trips/:id`  | `trips#show`      |
+| POST   | `/trips`      | `trips#create`    |
+| PATCH  | `/trips/:id`  | `trips#update`    |
+| DELETE | `/trips/:id`  | `trips#delete`    |
+
+### Boats
+
+| Verb   | URI Pattern               | Controller#Action |
+|--------|---------------------------|-------------------|
+| POST   | `/boats/:tripId`          | `boats#create`    |
+| PATCH  | `/boats/:tripId/:boatId`  | `boats#update`    |
+| DELETE | `/boats/:tripId/:boatId`  | `boats#delete`    |
 
 ### Users
 
@@ -95,11 +121,3 @@ Review: {
 | POST   | `/sign-in`             | `users#signin`    |
 | PATCH  | `/change-password/`    | `users#changepw`  |
 | DELETE | `/sign-out/`           | `users#signout`   |
-
-### Reviews
-
-| Verb   | URI Pattern                   | Controller#Action  |
-|--------|-------------------------------|--------------------|
-| POST   | `/reviews/:boatId`            | `reviews#create`   |
-| PATCH  | `/reviews/:boatId/:reviewId`  | `reviews#update`   |
-| DELETE | `/reviews/:boatId/:reviewId`  | `reviews#delete`   |
