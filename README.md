@@ -4,7 +4,7 @@ Aaron Humphres, Carter Geile, and Isobel Morales
 
 ## Overview 
 
-This API will allow the users of our react front-end application to CRUD boats and their reservations. 
+This API will allow the users of our react front-end application to CRUD boats and their reviews. 
 
 This application uses token authentication instead of sessions. 
 
@@ -26,7 +26,10 @@ Boat: {
     image: {
         type: String
     },
-    reservations: [reservationSchema],
+    weather: {
+        type: enum
+    },
+    reviews: [reviewSchema],
     owner: {
         type: monggose.Schema.Types.ObjectId,
         ref: 'User'
@@ -57,19 +60,16 @@ user: {
 	}
 }
 
-Reservation: {
-    rate: {
-        type: Number
+Review: {
+   note: {
+        type: String,
+        required: true
     },
-    date: {
-        type: Date
-    },
-    duration: {
-        type: Number
-    },
-    weather: {
-        type: String
-    }
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    } 
 }
 ```
 
@@ -94,10 +94,10 @@ Reservation: {
 | PATCH  | `/change-password/`    | `users#changepw`  |
 | DELETE | `/sign-out/`           | `users#signout`   |
 
-### Reservations
+### Reviews
 
-| Verb   | URI Pattern                             | Controller#Action       |
-|--------|-----------------------------------------|-------------------------|
-| POST   | `/reservations/:boatId`                 | `reservations#create`   |
-| PATCH  | `/reservations/:boatId/:reservationId`  | `reservations#update`   |
-| DELETE | `/reservations/:boatId/:reservationId`  | `reservations#delete`   |
+| Verb   | URI Pattern                   | Controller#Action  |
+|--------|-------------------------------|--------------------|
+| POST   | `/reviews/:boatId`            | `reviews#create`   |
+| PATCH  | `/reviews/:boatId/:reviewId`  | `reviews#update`   |
+| DELETE | `/reviews/:boatId/:reviewId`  | `reviews#delete`   |
