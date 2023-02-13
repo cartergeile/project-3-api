@@ -44,7 +44,7 @@ Boat: {
         type: Number,
         required: true
     },
-    boatLength: {
+    length: {
         type: Number,
         required: true
     },
