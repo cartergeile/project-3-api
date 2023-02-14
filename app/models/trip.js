@@ -1,6 +1,6 @@
 //// DEPENDENCIES ////
 const mongoose = require('mongoose')
-const Boat = require('./boat')
+const boatSchema = require('./boat')
 
 //// SCHEMA ////
 
@@ -23,10 +23,7 @@ const tripSchema = new mongoose.Schema(
             type: Date,
             required: true
         },
-        boat: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Boat'
-        },
+        boats: [boatSchema],
         owner: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'

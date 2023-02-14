@@ -26,8 +26,6 @@ This application uses token authentication instead of sessions.
 
 | Verb   | URI Pattern                | Controller#Action |
 |--------|----------------------------|-------------------|
-| GET    | `/boats`                   | `boats#index`     |
-| GET    | `/boats/:tripId`           | `boats#index`     |
 | GET    | `/boats/:tripId/:boatId`   | `boats#show`      |
 | POST   | `/boats/:tripId`           | `boats#create`    |
 | PATCH  | `/boats/:tripId/:boatId`   | `boats#update`    |
@@ -35,11 +33,11 @@ This application uses token authentication instead of sessions.
 
 ### Reviews
 
-| Verb   | URI Pattern                   | Controller#Action |
-|--------|-------------------------------|-------------------|
-| POST   | `/reviews/:boatId`            | `reviews#create`  |
-| PATCH  | `/reviews/:boatId/:reviewId`  | `reviews#update`  |
-| DELETE | `/reviews/:boatId/:reviewId`  | `reviews#delete`  |
+| Verb   | URI Pattern                           | Controller#Action |
+|--------|---------------------------------------|-------------------|
+| POST   | `/reviews/:tripId/:boatId`            | `reviews#create`  |
+| PATCH  | `/reviews/:tripId/:boatId/:reviewId`  | `reviews#update`  |
+| DELETE | `/reviews/:tripId/:boatId/:reviewId`  | `reviews#delete`  |
 
 ### Users
 
