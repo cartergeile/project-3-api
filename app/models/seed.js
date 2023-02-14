@@ -1,4 +1,4 @@
-// seed database - run with 'npm run seed'
+// seed database - run with 'npm run boat seed'
 
 const mongoose = require('mongoose')
 const Boat = require('./boat')
@@ -57,6 +57,3 @@ mongoose.connect(db, {
             mongoose.connection.close()
         })
     })
-
-
-
