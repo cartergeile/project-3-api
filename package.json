@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node ./app/models/TripSeed.js"
   },
-  "author": "Aaron Humphres",
+  "author": "Aaron Humphres, Carter Geile, and Isobel Morales",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
