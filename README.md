@@ -26,8 +26,9 @@ This application uses token authentication instead of sessions.
 
 | Verb   | URI Pattern                | Controller#Action |
 |--------|----------------------------|-------------------|
+| GET    | `/boats`                   | `boats#index`     |
 | GET    | `/boats/:tripId`           | `boats#index`     |
-| GET    | `/boats/:boatId`           | `boats#show`      |
+| GET    | `/boats/:tripId/:boatId`   | `boats#show`      |
 | POST   | `/boats/:tripId`           | `boats#create`    |
 | PATCH  | `/boats/:tripId/:boatId`   | `boats#update`    |
 | DELETE | `/boats/:tripId/:boatId`   | `boats#delete`    |
