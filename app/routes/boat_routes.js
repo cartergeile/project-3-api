@@ -29,7 +29,7 @@ const router = express.Router()
 
 // INDEX
 // GET /baots
-router.get('/boats', requireToken, (req, res, next) => {
+router.get('/boats/:tripId', requireToken, (req, res, next) => {
 	Boat.find()
 		.then((boats) => {
 			// `boats` will be an array of Mongoose documents
@@ -45,7 +45,7 @@ router.get('/boats', requireToken, (req, res, next) => {
 
 // SHOW
 // GET /boats/5a7db6c74d55bc51bdf39793
-router.get('/boats/:id', requireToken, (req, res, next) => {
+router.get('/boats/:boatId', requireToken, (req, res, next) => {
 	// req.params.id will be set based on the `:id` in the route
 	Boat.findById(req.params.id)
 		.then(handle404)
@@ -57,7 +57,7 @@ router.get('/boats/:id', requireToken, (req, res, next) => {
 
 // CREATE
 // POST /boats
-router.post('/boats', requireToken, (req, res, next) => {
+router.post('/boats/:tripId', requireToken, (req, res, next) => {
 	// set owner of new boat to be current user
 	req.body.boat.owner = req.user.id
 
@@ -74,7 +74,7 @@ router.post('/boats', requireToken, (req, res, next) => {
 
 // UPDATE
 // PATCH /boats/5a7db6c74d55bc51bdf39793
-router.patch('/boats/:id', requireToken, removeBlanks, (req, res, next) => {
+router.patch('/boats/:tripId/:boatId', requireToken, removeBlanks, (req, res, next) => {
 	// if the client attempts to change the `owner` property by including a new
 	// owner, prevent that by deleting that key/value pair
 	delete req.body.boat.owner
@@ -97,7 +97,7 @@ router.patch('/boats/:id', requireToken, removeBlanks, (req, res, next) => {
 
 // DESTROY
 // DELETE /boats/5a7db6c74d55bc51bdf39793
-router.delete('/boats/:id', requireToken, (req, res, next) => {
+router.delete('/boats/:tripId/:boatId', requireToken, (req, res, next) => {
 	Boat.findById(req.params.id)
 		.then(handle404)
 		.then((boat) => {
