@@ -1,4 +1,4 @@
-// seed database - run with 'npm run BoatSeed'
+// seed database - run with 'npm run boatseed'
 
 const mongoose = require('mongoose')
 const Boat = require('./boat')
