@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "node ./app/models/TripSeed.js"
+    "tripseed": "node ./app/models/TripSeed.js",
+    "boatseed": "node ./app/models/BoatSeed.js"
   },
   "author": "Aaron Humphres, Carter Geile, and Isobel Morales",
   "license": "ISC",

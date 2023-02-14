@@ -1,3 +1,5 @@
+// seed database - run with 'npm run tripseed'
+
 const mongoose = require('mongoose')
 const Trip = require('./trip')
 const db = require('../../config/db')
