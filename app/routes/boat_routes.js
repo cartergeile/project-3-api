@@ -11,10 +11,11 @@ const router = express.Router()
 
 // SHOW
 // GET /boats/:tripId/:boatId
-router.get('/boats/:tripId/:boatId', requireToken, (req, res, next) => {
+router.get('/boats/:tripId/:boatId', (req, res, next) => {
 	const tripId = req.params.tripId
     const boatId = req.params.boatId
     Trip.findById(tripId)
+        .populate('owner')
         .then(handle404)
         .then(trip => {
             const theBoat = trip.boats.id(boatId)
@@ -25,9 +26,12 @@ router.get('/boats/:tripId/:boatId', requireToken, (req, res, next) => {
 
 // CREATE
 // POST /boats/:tripId
-router.post('/boats/:tripId', removeBlanks, (req, res, next) => {
-	const boat = req.body.boat
+router.post('/boats/:tripId', requireToken, (req, res, next) => {
+	req.body.boat.owner = req.user.id
+
+    const boat = req.body.boat
     const tripId = req.params.tripId
+
     Trip.findById(tripId)
         .then(handle404)
         .then(trip => {
@@ -43,8 +47,11 @@ router.post('/boats/:tripId', removeBlanks, (req, res, next) => {
 // UPDATE
 // PATCH /boats/:tripId/:boatId
 router.patch('/boats/:tripId/:boatId', requireToken, removeBlanks, (req, res, next) => {
-	const tripId = req.params.tripId
+	delete req.body.boat.owner 
+
+    const tripId = req.params.tripId
     const boatId = req.params.boatId
+
     Trip.findById(tripId)
         .then(handle404)
         .then(trip => {
@@ -62,6 +69,7 @@ router.patch('/boats/:tripId/:boatId', requireToken, removeBlanks, (req, res, ne
 router.delete('/boats/:tripId/:boatId', requireToken, (req, res, next) => {
 	const tripId = req.params.tripId
     const boatId = req.params.boatId
+    
     Trip.findById(tripId)
         .then(handle404)
         .then(trip => {
