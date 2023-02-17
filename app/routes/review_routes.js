@@ -11,7 +11,9 @@ const router = express.Router()
 
 // CREATE
 // POST /reviews/:tripId/:boatId
-router.post('/reviews/:tripId/:boatId', removeBlanks, (req, res, next) => {
+router.post('/reviews/:tripId/:boatId', requireToken, removeBlanks, (req, res, next) => {
+    req.body.review.author = req.user.id
+
 	const review = req.body.review
     const tripId = req.params.tripId
     const boatId = req.params.boatId
@@ -35,6 +37,8 @@ router.post('/reviews/:tripId/:boatId', removeBlanks, (req, res, next) => {
 // UPDATE
 // PATCH /reviews/:tripId/:boatId/:reviewId
 router.patch('/reviews/:tripId/:boatId/:reviewId', requireToken, removeBlanks, (req, res, next) => {
+    delete req.body.review.author 
+    
     const tripId = req.params.tripId
 	const boatId = req.params.boatId
     const reviewId = req.params.reviewId
