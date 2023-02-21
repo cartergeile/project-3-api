@@ -17,6 +17,7 @@ router.post('/reviews/:tripId/:boatId', requireToken, removeBlanks, (req, res, n
 	const review = req.body.review
     const tripId = req.params.tripId
     const boatId = req.params.boatId
+    
     Trip.findById(tripId)
         .then(handle404)
         .then(trip => {
