@@ -55,6 +55,14 @@ tripSchema.virtual('cityid').get(function (){
             return 'n/a'
     }
 })
+tripSchema.virtual('formattedStartDate').get(function () {
+    const formattedDate = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(this.startDate)
+    return formattedDate
+})
+tripSchema.virtual('formattedEndDate').get(function () {
+    const formattedDate = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(this.endDate)
+    return formattedDate
+})
 
 //// EXPORT ////
 
