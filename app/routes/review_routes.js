@@ -11,7 +11,7 @@ const router = express.Router()
 
 // CREATE
 // POST /reviews/:tripId/:boatId
-router.post('/reviews/:tripId/:boatId', requireToken,removeBlanks, (req, res, next) => {
+router.post('/reviews/:tripId/:boatId', requireToken, removeBlanks, (req, res, next) => {
     req.body.review.author = req.user.id
 
 	const review = req.body.review
